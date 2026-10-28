@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>It's Ducking Time</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1725;--card:#18283a;--text:#f5f8fc;--muted:#aebed0;--accent:#fcd56b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#0b192c,#17354a);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--text);min-height:100vh;padding:32px 18px}
+main{max-width:1000px;margin:auto}.members{font-weight:650;color:#fcd56b;margin-top:7px;font-size:.98rem}h1{font-size:clamp(1.8rem,5vw,2.8rem);margin:0 0 6px}p{color:var(--muted);margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}.clock{border:1px solid #ffffff20;border-radius:18px;background:var(--card);padding:22px;box-shadow:0 8px 20px #0002}.clock.server{border-color:#fcd56b99;background:#263446}.city{font-size:1.03rem;font-weight:700}.zone{font-size:.83rem;color:var(--muted);margin-top:3px}.time{font-size:clamp(2.1rem,5vw,3rem);font-variant-numeric:tabular-nums;letter-spacing:.035em;font-weight:750;margin:15px 0 5px}.date{color:#d8e5f4;font-size:.92rem}.server .time{color:var(--accent)}footer{margin-top:23px;line-height:1.6;font-size:.84rem;color:var(--muted)}.dot{display:inline-block;width:9px;height:9px;border-radius:100%;background:#63d9ad;margin-right:7px}
+</style>
+</head>
+<body><main>
+<h1>🦆 It's Ducking Time</h1><p><span class="dot"></span>Live times · Updates every second · 24-hour format</p>
+<section class="grid" id="clocks">
+<div class="clock" data-zone="Europe/Berlin"><div class="city">🇩🇪 Berlin, Germany</div><div class="members">🦆 Reob &amp; Krodik</div><div class="zone">Europe/Berlin</div><div class="time">--:--:--</div><div class="date"></div></div>
+<div class="clock" data-zone="America/New_York"><div class="city">🇺🇸 Ohio, USA</div><div class="members">🦆 Roux</div><div class="zone">Eastern Time</div><div class="time">--:--:--</div><div class="date"></div></div>
+<div class="clock" data-zone="Australia/Melbourne"><div class="city">🇦🇺 Melbourne, Australia</div><div class="members">🦆 Nyells</div><div class="zone">Australia/Melbourne</div><div class="time">--:--:--</div><div class="date"></div></div>
+<div class="clock" data-zone="America/New_York"><div class="city">🇺🇸 Georgia, USA</div><div class="members">🦆 Thumbs</div><div class="zone">Eastern Time</div><div class="time">--:--:--</div><div class="date"></div></div>
+<div class="clock server" data-zone="Atlantic/South_Georgia"><div class="city">🎮 Game Server</div><div class="zone">Assumed UTC−02:00 (fixed)</div><div class="time">--:--:--</div><div class="date"></div></div>
+</section><footer>All clocks use your device's current time and its timezone database; internet isn't required once the page is loaded. Ohio and Georgia share Eastern Time. Server timezone is an assumption based on your reported time comparison—verify the server date too.<br><strong>Google Docs:</strong> Google Docs doesn't execute embedded HTML/JavaScript. Host this file on a website (e.g., GitHub Pages) and insert a clickable link in your document, or use a static screenshot.</footer>
+</main><script>
+const cards=[...document.querySelectorAll('[data-zone]')];
+function update(){const now=new Date();for(const card of cards){const zone=card.dataset.zone;card.querySelector('.time').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:zone,hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).format(now);card.querySelector('.date').textContent=new Intl.DateTimeFormat('en-AU',{timeZone:zone,weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(now);}}
+update();setInterval(update,1000);
+</script></body></html>
